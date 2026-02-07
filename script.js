@@ -1,4 +1,3 @@
-/* DELETE COMMENT
 const jokesContainer = document.getElementById('jokes_container');
 
 const jokeForm = document.getElementById('joke_form');
@@ -82,4 +81,3 @@ function dislike(id) {
         document.getElementById('joke_'+id).outerHTML = getJokeHTML(joke);
     };
 }
-*/
