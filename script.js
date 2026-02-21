@@ -1,6 +1,8 @@
-const jokesContainer = document.getElementById('jokes_container');
-
 const jokeForm = document.getElementById('joke_form');
+
+const form = document.getElementById('joke_form');
+const input = document.querySelector('.joke_form__input');
+const jokesContainer = document.getElementById('jokes_container');
 
 let currentLength = 0;
 
