@@ -4,7 +4,6 @@ const url = require('url');
 const fs = require('fs');
 const dataPath = path.join(__dirname, 'data');
 
-
 const server = http.createServer((req, res)=> {
     try {
         res.setHeader('Access-Control-Allow-Origin', '*');
@@ -49,20 +48,18 @@ function addJoke(req, res) {
     req.on('data', function(chunk) {
         data += chunk;
     });
-
     req.on('end', function() {
         let joke = JSON.parse(data);
-
         joke.likes = 0;
         joke.dislikes = 0;
 
         let dir = fs.readdirSync(dataPath);
-        let fileName = dir.length + '.json';
+        let fileName = dir.length+'.json';
         let filePath = path.join(dataPath, fileName);
 
+        
         fs.writeFileSync(filePath, JSON.stringify(joke));
-
-        res.statusCode = 201;
+        res.statusCode = '201';
         return res.end(JSON.stringify(joke));
     });
 }
