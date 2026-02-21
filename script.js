@@ -47,17 +47,30 @@ function getJokeHTML(joke) {
     `;
 }
 
-jokeForm.addEventListener('submit', (event) => {
-    event.preventDefault();
-    const content = jokeForm.joke.value;
-    const joke = {content, likes: 0, dislikes: 0, id: currentLength}
-    const addJokeXhr = new XMLHttpRequest();
-    addJokeXhr.open('POST', 'http://localhost:3000/jokes');
-    addJokeXhr.send(JSON.stringify(joke));
-    addJokeXhr.onload = () => {
-        jokesContainer.innerHTML += getJokeHTML(joke);
-        currentLength++;
-    };
+
+form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const jokeText = input.value.trim();
+
+    // Якщо пусто або тільки пробіли — нічого не робимо
+    if (jokeText === '') {
+        return;
+    }
+
+    // Додаємо жарт тільки якщо текст є
+    const jokeDiv = document.createElement('div');
+    jokeDiv.classList.add('joke');
+    jokeDiv.innerHTML = `
+        <div class="joke__content">
+            ${jokeText}
+        </div>
+    `;
+
+    jokesContainer.appendChild(jokeDiv);
+
+    // Очищаємо поле
+    input.value = '';
 });
 
 function like(id) {
