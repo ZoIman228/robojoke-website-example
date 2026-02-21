@@ -50,7 +50,16 @@ function getJokeHTML(joke) {
 
 jokeForm.addEventListener('submit', (event) => {
     event.preventDefault();
-    const content = jokeForm.joke.value;
+    const content = jokeForm.joke.value.trim(); // Видаляємо пробіли з початку і кінця
+
+    // --- ПОЧАТОК ПЕРЕВІРКИ ---
+    // Якщо текст жарту порожній після обрізання пробілів
+    if (content === '') {
+        alert('Будь ласка, введіть текст жарту!'); // Попереджаємо користувача
+        return; // Припиняємо виконання функції, жарт НЕ додається
+    }
+    // --- КІНЕЦЬ ПЕРЕВІРКИ ---
+
     const joke = {content, likes: 0, dislikes: 0, id: currentLength}
     const addJokeXhr = new XMLHttpRequest();
     addJokeXhr.open('POST', 'http://localhost:3000/jokes');
@@ -58,6 +67,7 @@ jokeForm.addEventListener('submit', (event) => {
     addJokeXhr.onload = () => {
         jokesContainer.innerHTML += getJokeHTML(joke);
         currentLength++;
+        jokeForm.joke.value = ''; // Очищаємо поле вводу після успішного додавання
     };
 });
 
