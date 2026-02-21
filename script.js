@@ -50,15 +50,14 @@ function getJokeHTML(joke) {
 
 jokeForm.addEventListener('submit', (event) => {
     event.preventDefault();
-    const content = jokeForm.joke.value.trim(); // Видаляємо пробіли з початку і кінця
+    const content = jokeForm.joke.value.trim(); 
 
-    // --- ПОЧАТОК ПЕРЕВІРКИ ---
-    // Якщо текст жарту порожній після обрізання пробілів
+    
     if (content === '') {
-        alert('Будь ласка, введіть текст жарту!'); // Попереджаємо користувача
-        return; // Припиняємо виконання функції, жарт НЕ додається
+        alert('Будь ласка, введіть текст жарту!'); 
+        return; 
     }
-    // --- КІНЕЦЬ ПЕРЕВІРКИ ---
+
 
     const joke = {content, likes: 0, dislikes: 0, id: currentLength}
     const addJokeXhr = new XMLHttpRequest();
